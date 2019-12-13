@@ -9,8 +9,8 @@ body {
   background-color: #442f11;
   opacity: 70%;
   color: #fbfffe;
-  margin: 2rem;
-  width: 25rem;
+  margin: 0.5rem;
+  width: 20rem;
 }
 .card-title {
   font-size: 1rem;
@@ -24,4 +24,10 @@ body {
   border: 1px solid #5f9fdd;
   margin: 0.5rem 0;
   text-align: justify;
+}
+.card-case {
+  display: flex;
+  max-width: fit-content;
+  flex-wrap: wrap;
+  justify-content: center;
 }

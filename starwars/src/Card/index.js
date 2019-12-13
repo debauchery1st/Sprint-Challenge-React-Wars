@@ -1,14 +1,15 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
+
 const StarWarsCard = (props) => {
-  // props [category, name, birth_year]
+  // props [category, character]
   return (
       <Card key={props.key}>
         <CardBody>
-  <CardTitle>{props.character.name}</CardTitle>
+          <CardTitle>{props.character.name}</CardTitle>
           <CardText>
-            <li>height: {props.character.height || "waiting for response from server"}</li>
+            <li>height: {props.character.height}</li>
             <li>mass: {props.character.mass}</li>
             <li>hair: {props.character.hair_color}</li>
             <li>skin: {props.character.skin_color}</li>

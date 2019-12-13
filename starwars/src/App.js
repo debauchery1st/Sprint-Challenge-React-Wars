@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Card from "./Card";
+import StarWarsCard from "./Card";
 import axios from "axios";
 
 
@@ -10,6 +10,7 @@ const App = () => {
 
   const [apiState, setApiState] = useState([]);
   const [peopleList, setPeopleList] = useState([]);
+  const [page, setPage] = useState(0);
   const swPeopleURL = "https://swapi.co/api/people/";
   // const previousPageURL = () => apiState.previous
   // const nextPageURL = () => apiState.next;
@@ -23,15 +24,22 @@ const App = () => {
     new axios.get(swPeopleURL).then((result) => {
       const r2d2says = result.data;
       setApiState(r2d2says);
-      setPeopleList(r2d2says.results.map((person, idx)=> Card({key: idx, category: "People", character: person})));
+      setPeopleList(r2d2says.results.map((person, idx)=> StarWarsCard({key: idx, category: "People", character: person})));
+      const [kw, arg] = r2d2says.next.split("?")[1].split("=");
+      if (kw.toLowerCase() === "page") {
+        const getPage = parseInt(arg) - 1;
+        setPage(getPage);
+        console.log(`Page: ${getPage}`);
+      };
     }).catch((error) => console.log(apiState));
   }, []);
-
+  
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
-      <br />
-      {peopleList}
+      <div key={page} className="card-case">
+        {peopleList}
+      </div>
     </div>
   );
 }
