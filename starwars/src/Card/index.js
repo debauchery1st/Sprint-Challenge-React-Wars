@@ -2,12 +2,8 @@ import React from 'react';
 import { Card, CardBody, CardTitle, CardText, CardHeader } from 'reactstrap';
 
 const StarWarsCard = (props) => {
-  // props [category, character]
-  // const haveImage = imgKeys[props.character.name] || false;
-  // const charImage = (!haveImage) ? "":<CardImg src={haveImage}/>
-
   return (
-   <div key={["card", props.key, "container"].join("")} className="card-container">
+   <div key={["card", props.key, "container"].join("")} className="card-container" >
       <Card key={["card",props.key, "-front"].join("")} className="card">
         <CardBody className="front">
           <CardTitle>{props.character.name}</CardTitle>
