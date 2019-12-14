@@ -5,29 +5,62 @@ body {
   background-image: url('./sw-bg.jpg');
   background-size: cover;
 }
-.card {
-  background-color: #442f11;
-  opacity: 70%;
-  color: #fbfffe;
-  margin: 0.5rem;
-  width: 20rem;
-}
-.card-title {
-  font-size: 1rem;
-  margin: 1rem 0;
-  text-shadow: 1px 1px 5px #fff;
-}
-.card-text {
-  background-color: #0d5aa0;
-  border-radius: 5px;
-  padding: 2rem;
-  border: 1px solid #5f9fdd;
-  margin: 0.5rem 0;
-  text-align: justify;
-}
 .card-case {
   display: flex;
-  max-width: fit-content;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.card-container {
+  display: inline-block;
+  opacity: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.card {
+  position: relative;
+  width: 24rem;
+  height: 24rem;
+  transition: all 0.9s ease;
+  transform-style: preserve-3d;
+}
+.front,
+.back {
+  position: absolute;
+  background: #442f11;
+  top: 0;
+  left: 0;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 5px;
+  color: #fbfffe;
+  box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+  backface-visibility: hidden;
+}
+.front {
+  display: flex;
+  align-items: center;
   justify-content: center;
+  font-size: 30px;
+}
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.card-container:hover .card {
+  transform: rotateY(180deg);
+}
+.back {
+  transform: rotateY(180deg);
+}
+.card-body {
+  display: flex;
+  flex-flow: column wrap;
+}
+.card-header {
+  width: 70%;
+  background-color: #215f9b;
+  opacity: 90%;
+  border: 1px solid white;
 }

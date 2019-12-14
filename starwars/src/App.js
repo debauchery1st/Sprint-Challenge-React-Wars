@@ -3,6 +3,7 @@ import './App.css';
 import StarWarsCard from "./Card";
 import axios from "axios";
 
+// var gIS = require("g-i-s");
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -12,6 +13,15 @@ const App = () => {
   const [peopleList, setPeopleList] = useState([]);
   const [page, setPage] = useState(0);
   const swPeopleURL = "https://swapi.co/api/people/";
+  // const quantImages = (q) => {
+  //   return `https://www.qwant.com/?q=${q.split(" ").join("%20")}&t=images&license=public`;
+  // }
+  // function getFirstResult(q) {
+  //   axios.get(quantImages(q)).then((results) =>{
+  //     console.log(results.data)
+  //   }).catch((err) =>console.log)
+  // }
+  //document.getElementsByClassName("result result--images first").item(0).querySelector("a").href;
   // const previousPageURL = () => apiState.previous
   // const nextPageURL = () => apiState.next;
 
@@ -24,7 +34,12 @@ const App = () => {
     new axios.get(swPeopleURL).then((result) => {
       const r2d2says = result.data;
       setApiState(r2d2says);
-      setPeopleList(r2d2says.results.map((person, idx)=> StarWarsCard({key: idx, category: "People", character: person})));
+      setPeopleList(r2d2says.results.map((person, idx)=> StarWarsCard({
+        key: idx, 
+        category: "People", 
+        character: person,
+        // images: () => gIS(person.name).data
+      })));
       const [kw, arg] = r2d2says.next.split("?")[1].split("=");
       if (kw.toLowerCase() === "page") {
         const getPage = parseInt(arg) - 1;
