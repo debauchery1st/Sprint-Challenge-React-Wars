@@ -6,11 +6,17 @@ import axios from "axios";
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
-  const [saberOn] = useState(new Audio("/SaberOn.wav"));
-  // const [saberSwing] = useState(new Audio("/SlowSabr.wav"));
+
   const [apiState, setApiState] = useState([]);
   const [peopleList, setPeopleList] = useState([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(0);  
+  //    1. **declare audio within ../public/index.html**
+  //    2. **store a reference to your audio selectors in state**
+  const [audioFX] = useState({
+    saberOn: "saber1",
+    saberSwing: "saber0",
+  });
+  
   const swPeopleURL = "https://swapi.co/api/people/";
   // const previousPageURL = () => apiState.previous
   // const nextPageURL = () => apiState.next;
@@ -18,19 +24,18 @@ const App = () => {
   // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
-  // saberSwing.play();
+
   useEffect(() => {
     console.log("requesting starwars information");
-    saberOn.play();
     new axios.get(swPeopleURL).then((result) => {
+      document.getElementById(audioFX.saberOn).play();
       const r2d2says = result.data;
       setApiState(r2d2says);
       setPeopleList(r2d2says.results.map((person, idx)=> StarWarsCard({
         key: idx, 
         category: "People", 
         character: person,
-        // fx: saberSwing
-        // images: () => gIS(person.name).data
+        audiofx: audioFX // 3. **pass the audio refs through props**
       })));
       const [kw, arg] = r2d2says.next.split("?")[1].split("=");
       if (kw.toLowerCase() === "page") {
