@@ -1,5 +1,5 @@
 import React from 'react';
-import style from 'styled-components'
+import style from 'styled-components';
 
 function StarWarsCard(props){
   if (!props.width) props.width = '20rem'; // set a default width
