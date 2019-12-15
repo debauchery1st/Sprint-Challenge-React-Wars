@@ -62,6 +62,17 @@ const CardBackText = style.p`
   font-size: 1.2rem;
 `;
 
+const LI = style.li`
+  display: flex;
+  font-size: .8rem;
+`;
+
+function ListItem(value) {
+  return (
+  <LI>{value}</LI>
+  );
+}
+
 function StarWarsCard(props){
   // const front = 
   // 4. **clone <audio>, to allow overlap.**
@@ -70,6 +81,11 @@ function StarWarsCard(props){
     // 5. **play our (cloned) <audio>**
     FX.play();
   }
+  
+  const details = Object.keys(props.character)
+  .filter((key)=> !props.character[key].includes("http") && typeof props.character[key] === "string" && key !== "created" && key !== "edited")
+  .map((key) => ListItem(`${key}: ${props.character[key]}`));
+
   return(
     <CardContainer key={props.key} onMouseEnter={() => lightSaber()}>
     <Card>
@@ -77,11 +93,11 @@ function StarWarsCard(props){
         <CardFrontText>{(!props.character) ? "...loading":props.character.name}</CardFrontText>
       </CardFront>
       <CardBack>
-        <CardBackText>{(!props.character) ? "...loading":props.character.name}</CardBackText>
+        <CardBackText>{(!props.character) ? "...loading":details}</CardBackText>
       </CardBack>
     </Card>
   </CardContainer>
   );
 }
-  
+
 export default StarWarsCard;
