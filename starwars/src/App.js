@@ -47,7 +47,9 @@ function App() {
             const r2d2says = result.data;
             setApiState(r2d2says);
             setPeopleList(r2d2says.results.map((person, idx)=> StarWarsCard({
-                key: idx, 
+                key: idx,
+                width: "20rem",
+                height: "24rem",
                 category: "People", 
                 character: person,
                 audiofx: audioFX // 3. **pass the audio refs through props**
