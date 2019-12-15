@@ -11,7 +11,6 @@ function App() {
     if (dealer.url.length === 0) setDealer({url:"https://swapi.co/api/people/"}); // init
     
     useEffect(() => {
-        document.body.style.backgroundColor = "black";
         console.log("requesting starwars information");
         axios.get(dealer.url).then((result) => {
             setDealt(result.data.results.map((person, idx)=> StarWarsCard({
