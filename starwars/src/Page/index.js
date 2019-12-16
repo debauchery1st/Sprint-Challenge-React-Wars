@@ -9,6 +9,12 @@ function determinePage(nextUrl) {
     return 1;
 }
 
+const Button = style.button`
+  font-family: Fira Code, monospace;
+  letter-spacing: 2px;  
+  text-shadow: 1px 1px 5px #fff;
+`
+
 const Wrapper = style.div`
   display: flex;
   flex-flow: column;
@@ -35,4 +41,4 @@ const H2 = style.h2`
     text-align: center;
 `;
 
-export {Wrapper, CardTable, H1, H2, determinePage}
+export {Wrapper, CardTable, H1, H2, determinePage, Button}
