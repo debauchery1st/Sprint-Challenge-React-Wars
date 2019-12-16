@@ -8,12 +8,28 @@ function determinePage(nextUrl) {
     };
     return 1;
 }
+const ButtonWrapper = style.div`
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+`;
 
 const Button = style.button`
   font-family: Fira Code, monospace;
-  letter-spacing: 2px;  
+  letter-spacing: 2px;
+  background-color: #fcfffe;
   text-shadow: 1px 1px 5px #fff;
-`
+  box-shadow: 0 15px 23px 0 rgba(0, 0, 0, 0.4), 0 1rem 1rem 0 rgba(0, 0, 0, 0.20);
+  margin 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #221f20;
+  :hover {
+      background-color: #221f20;
+      color: #fcfffe;
+  }
+  `;
 
 const Wrapper = style.div`
   display: flex;
@@ -41,4 +57,4 @@ const H2 = style.h2`
     text-align: center;
 `;
 
-export {Wrapper, CardTable, H1, H2, determinePage, Button}
+export {Wrapper, CardTable, H1, H2, determinePage, Button, ButtonWrapper}

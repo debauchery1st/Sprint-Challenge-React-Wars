@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import StarWarsCard from './Card';
-import {Wrapper, CardTable, H1, H2, determinePage, Button} from './Page';
+import {Wrapper, CardTable, H1, H2, determinePage, Button, ButtonWrapper} from './Page';
 
 function App() {
     const [dealer, setDealer] = useState({url: ""});
@@ -36,9 +36,16 @@ function App() {
         <H1>React Wars</H1>
         <br />
         <H2>styled-components</H2>
-        {paginator.prev ? <Button onClick={() => previousPage()}>Prev</Button>:""}        
-        <CardTable>{dealt}</CardTable>
-        {paginator.next ? <Button onClick={() => nextPage()}>Next</Button>:""}        
+        
+        <ButtonWrapper>
+          {paginator.prev ? <Button onClick={() => previousPage()}>Prev</Button>:""}        
+          {paginator.next ? <Button onClick={() => nextPage()}>Next</Button>:""}        
+        </ButtonWrapper>
+       
+        <CardTable>
+          {dealt}
+        </CardTable>
+       
         </Wrapper>
       </div>
   );
