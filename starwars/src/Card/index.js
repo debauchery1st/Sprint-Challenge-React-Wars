@@ -25,7 +25,7 @@ function StarWarsCard(props){
     height: ${props.height};
     transition: all 1s ease;
     transform-style: preserve-3d;
-    :hover {
+    :hover, :active {
       transform: rotateY(180deg);
     }
   `;
