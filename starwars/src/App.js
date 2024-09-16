@@ -1,18 +1,53 @@
-import React from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import StarWarsCard from './Card';
+import {Wrapper, CardTable, H1, H2, determinePage, Button, ButtonWrapper} from './Page';
 
-const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+function App() {
+    const [dealer, setDealer] = useState({url: ""});
+    const [dealt, setDealt] = useState([]);
+    const [paginator, setPaginator] = useState({next: "", prev: ""});
 
-  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+    if (dealer.url.length === 0) setDealer({url:"https://swapi.co/api/people/"}); // init
+    
+    useEffect(() => {
+        console.log("requesting starwars information");
+        axios.get(dealer.url).then((result) => {
+            setDealt(result.data.results.map((person, idx)=> StarWarsCard({
+                key: idx,
+                width: "20rem",
+                height: "24rem",
+                category: "People",
+                character: person,
+                audiofx: {saberOn: "saber1", saberSwing: "saber0"}
+            })));
+            setPaginator({next: result.data.next, prev: result.data.previous});
+            console.log(`Page ${determinePage(result.data.next)}`);
+            document.getElementById("saber1").play(); // sound when GET is finished.
+        }).catch((error) => console.log(error));
+    }, [dealer]); // (listen for dealer)
 
-  return (
-    <div className="App">
-      <h1 className="Header">React Wars</h1>
-    </div>
+    const previousPage = () => paginator.prev ? setDealer({url: paginator.prev}):true;
+    const nextPage = () => paginator.next ? setDealer({url: paginator.next}):true;
+    
+    return (
+      <div className="App">
+        <Wrapper>
+        <H1>React Wars</H1>
+        <br />
+        <H2>styled-components</H2>
+        
+        <ButtonWrapper>
+          {paginator.prev ? <Button onClick={() => previousPage()}>Prev</Button>:""}        
+          {paginator.next ? <Button onClick={() => nextPage()}>Next</Button>:""}        
+        </ButtonWrapper>
+       
+        <CardTable>
+          {dealt}
+        </CardTable>
+       
+        </Wrapper>
+      </div>
   );
 }
 
